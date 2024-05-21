@@ -1,0 +1,80 @@
+# Reading pref.tcl
+# //  Questa Sim-64
+# //  Version 2021.1 win64 Jan 19 2021
+# //
+# //  Copyright 1991-2021 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+do sim
+# Cannot open macro file: sim
+cd scripts
+do sim.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# QuestaSim-64 vmap 2021.1 Lib Mapping Utility 2021.01 Jan 19 2021
+# vmap work work 
+# Modifying C:/MentorGraphics/win64/../modelsim.ini
+# ** Error: Ì≤æÔ¢æÏé∑Ï´éÍé°‡®ç
+#        Unable to replace existing ini file (C:/MentorGraphics/win64/../modelsim.ini).  File can not be renamed.
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 23:39:28 on May 20,2024
+# vlog -reportprogress 300 -sv -work work ../pkg/definitions.sv 
+# -- Compiling package definitions
+# 
+# Top level modules:
+# 	--none--
+# End time: 23:39:28 on May 20,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 23:39:28 on May 20,2024
+# vlog -reportprogress 300 -sv -work work ../src/precompute.sv -cover bescfx 
+# -- Compiling package definitions
+# ** Warning: ../src/precompute.sv(12): (vlog-13233) Design unit "precompute_sv_unit" already exists and will be overwritten. Overwriting SystemVerilog $unit with different source files.
+# -- Compiling package precompute_sv_unit
+# -- Importing package definitions
+# -- Compiling module precompute
+# 
+# Top level modules:
+# 	precompute
+# End time: 23:39:28 on May 20,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 23:39:28 on May 20,2024
+# vlog -reportprogress 300 -sv -work work ../sim/tb_precompute.sv -cover bescfx 
+# -- Compiling package definitions
+# ** Warning: ../sim/tb_precompute.sv(3): (vlog-13233) Design unit "tb_precompute_sv_unit" already exists and will be overwritten. Overwriting SystemVerilog $unit with different source files.
+# -- Compiling package tb_precompute_sv_unit
+# -- Importing package definitions
+# -- Compiling module tb_precompute
+# 
+# Top level modules:
+# 	tb_precompute
+# End time: 23:39:28 on May 20,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim -voptargs="+acc" work.tb_precompute 
+# Start time: 23:39:28 on May 20,2024
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading sv_std.std
+# Loading work.definitions(fast)
+# Loading work.tb_precompute_sv_unit(fast)
+# Loading work.tb_precompute(fast)
+# Loading work.precompute_sv_unit(fast)
+# Loading work.precompute(fast)
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: 12907  Hostname: DESKTOP-SIR22V0  ProcessID: 5296
+#           Attempting to use alternate WLF file "./wlfthbrac8".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlfthbrac8
+# ** Note: $stop    : ../sim/tb_precompute.sv(73)
+#    Time: 24 ns  Iteration: 0  Instance: /tb_precompute
+# Break in Module tb_precompute at ../sim/tb_precompute.sv line 73
+# End time: 23:48:52 on May 20,2024, Elapsed time: 0:09:24
+# Errors: 0, Warnings: 2

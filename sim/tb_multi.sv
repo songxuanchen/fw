@@ -12,6 +12,9 @@ module tb_multi;
     logic                               rst_n   ;
     logic [DATA_WIDTH/32-1:0][31:0]     dat1    ;
     logic [DATA_WIDTH/32-1:0][31:0]     dat2    ;
+    //logic [DATA_WIDTH-1:0]              dat1    ;
+    //logic [DATA_WIDTH-1:0]              dat2    ;
+    logic                               vld_in  ;
 
 /********************************Output********************************/
 
@@ -36,29 +39,37 @@ module tb_multi;
 /********************************Generate random data1 and data2********************************/
 
     initial begin
-        dat1 <= '0;
-        dat2 <= '0;
+        dat1    <= '0   ;
+        dat2    <= '0   ;
+        vld_in  <= 0    ;
 
         while(!rst_n)
-            @(posedge clk);
+            @(negedge clk);
 
-        for(int i = 0; i < 10; i = i + 1)begin
-            @(posedge clk);
-            #(PERIOD/2);
-            fork
-                foreach(dat1[i])begin
-                    dat1[i] <= $urandom_range(1,2**32-1);
-                end
+        for(int i = 0; i < 100; i = i + 1)begin
+            @(negedge clk);
 
-                foreach(dat2[i])begin
-                    dat2[i] <= $urandom_range(1,2**32-1);
-                end
-            join
+            // dat1 <= $urandom_range(1,2**DATA_WIDTH-1);
+            // dat2 <= $urandom_range(1,2**DATA_WIDTH-1);
+
+            foreach(dat1[i])begin
+                dat1[i] <= $urandom_range(1,2**32-1);
+            end
+
+            foreach(dat2[i])begin
+                dat2[i] <= $urandom_range(1,2**32-1);
+            end
+            vld_in <= 1                              ;
+
+            @(negedge clk);
+            vld_in <= 0;
+
+                
+            repeat(DATA_WIDTH+1)begin
+                @(negedge clk);
+            end
         end
-
-        repeat(5)begin
-            @(posedge clk);
-        end
+        @(negedge clk);
         $stop;
     end
 
@@ -70,15 +81,26 @@ module tb_multi;
 
 /********************************Instantiate********************************/
 
-    multi2048#(
-        .DATA_WIDTH ( 2048 )
-    )u_multi2048(
+    multi#(
+        .DATA_WIDTH ( DATA_WIDTH )
+    )u_multi(
         //Input
         .clk    ( clk       ),
         .rst_n  ( rst_n     ),
         .dat1   ( dat1      ),
         .dat2   ( dat2      ),
+        .vld_in ( vld_in    ),
         //Output
         .product( product   )
     );
+
+/********************************Record product and reference product********************************/
+
+    integer product_file;
+    initial product_file = $fopen("D:/product.txt");
+    always @(product)   $fdisplay(product_file,"%h",product);
+
+    integer ref_product_file;
+    initial ref_product_file = $fopen("D:/ref_product.txt");
+    always @(ref_product)   $fdisplay(ref_product_file,"%h",ref_product);
 endmodule
